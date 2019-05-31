@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>拉勾网-专业的互联网招聘平台</title>
+</head>
+<script type="text/javascript" src="./jquery.js"></script>
+<style type="text/css">
+	body, html{
+		margin: 0px;
+		padding: 0px;
+	}
+	ul, li{
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+	}
+	.header{
+		height: 86px;
+	}
+	.header .bar{
+		font-size: 14px;
+		height:30px;
+		background-color: #333;
+	}
+	.header .bar .left-bar{
+		float: left;
+		margin-top: 5px;
+	}
+	.header .bar .left-bar .app{
+		color: #08d7a2;
+		background: url("./app_icon.png")10px 0 no-repeat;
+		padding: 0 12px 0 27px;
+		margin-top: 2px;
+		text-decoration:none;
+	}
+	.header .bar .left-bar .os{
+		color: #c4c3c3;
+		padding: 0 0 0 10px;
+		margin-top: 2px;
+		text-decoration:none;
+		border-left: 1px solid #5d5d5d;
+	}
+	.header .bar .left-bar .os:hover{
+		color:#fff;
+	}
+	.header .bar .right-bar{
+		float: right;
+		margin-top: 5px;
+	}
+	.header .bar .right-bar li{
+		float: left;
+		color: #c4c3c3;
+	    line-height: 15px;
+	    padding: 0 12px;
+	    margin: 3px 0 0;
+	    border-right: 1px solid #5d5d5d;
+	    font-size: 15px;
+	}
+	.header .bar .right-bar li:hover{
+		color:#fff;
+		cursor: pointer;
+	}
+	.nav{
+		height: 54px;
+	    border-top: 1px solid #d2d2d2;
+	    border-bottom: 1px solid #e5e5e5;
+	    background-color: #fafafa;
+	}
+	.nav .nav-left{
+		float: left;
+		width: 260px;
+		padding: 10px 0 0 35px; 
+	}
+	.nav .nav-left .logo-1{
+		margin-right: 8px;
+	    color: #333;
+	    font-size: 18px;
+	    font-weight: 400;
+	    margin-left: 10px;
+	}
+	.nav .nav-left .logo-2{
+		color: #999;
+	    font-size: 12px;
+	    cursor: pointer;
+	}
+	.nav .nav-mid{
+		float: left;
+		list-style: none;
+	}
+	.nav .nav-mid li{
+		float: left;
+		margin: 0 16px;
+		font-size: 18px;
+	    color: #999;
+	    line-height: 53px;
+	    padding: 0 5px;
+	}
+	.nav .nav-mid .selected{
+		border-bottom: 2px solid#00b38a;
+		color: #333;
+	}
+	.nav .nav-mid li:hover{
+		cursor: pointer;
+		color: #333;
+		border-bottom: 2px solid#00b38a;
+	}
+	.contain-header{
+		background-color:#F2F4F5;
+		padding: 30px 0 28px;
+		height:74px;
+	}
+	.contain-header .search{
+		margin: 0 auto;
+	    width: 938px;
+	    height: 46px;
+	}
+	.contain-header .search .search-input{
+		border:1px solid #ededed;
+		width: 762px;
+    	height: 20px;
+    	padding: 12px 16px;
+    	font-size: 16px;
+    	float: left;
+    	border: 1px solid #E8E8E8;
+	}
+	.contain-header .search button{
+		width: 142px;
+	    height: 46px;
+	    font-size: 18px;
+	    color: #FFF;
+	    border: 0;
+	    float: left;
+	    background: #00b38a;
+	    opacity: 0.8;
+	}
+	.contain-header .search button:hover{
+		opacity: 1;
+		cursor: pointer;
+	}
+	.contain-header .hot-search{
+		width: 938px;
+    	height: 22px;
+    	margin: 6px auto ;
+	}
+	.contain-header .hot-search a{
+		text-decoration: none;
+		color: #00b38a;
+		margin-right: 20px;
+		font-size: 14px;
+	}
+	.contain-header .hot-search b{
+		color: #00b38a;
+		margin-right: 20px;
+		font-size: 14px;
+		font-weight:normal;
+	}
+	.contain-header .hot-search a:hover{
+		text-decoration: underline;
+	}
+	.contain-body{
+		margin: 26px auto 0;
+    	width: 1200px;
+    	height:10000px;
+    	position: relative;
+	}
+	.contain-body .sidebar{
+		width:321px;
+		position: relative;
+		float: left;
+	}
+	.contain-body .sidebar .menu-box{
+		position: relative;
+		border: 1px solid #fff; 
+		border-right: none;
+		z-index: 2;
+	}
+	/*.contain-body .sidebar .menu-box:hover .menu-hide{
+		display: block;
+	}*/
+	.contain-body .sidebar .menu-box:hover{
+		border: 1px solid rgba(0,0,0,.09);
+		box-shadow: 0 0 4px 2px rgba(0,0,0,.09);
+		border-right:none 
+
+	}
+	.contain-body .sidebar .menu-box .menu-hide{
+		position: absolute;
+		top:-1px;
+		left:319px;
+		width: 500px;
+		height: 200px;
+		display: none;
+		background: #fff;
+		padding-left: 50px;
+		border: 1px solid rgba(0,0,0,.09);
+		box-shadow: 0 0 4px 2px rgba(0,0,0,.09);
+		border-radius: 2px;
+		border-left: none;	
+		  z-index: -1;
+	}
+	.contain-body .sidebar .menu-box .menu-hide::before{
+		content: "444";
+        padding: 12px 0;
+        position: absolute;
+        left: -15px;
+        top: 0;
+        background: #ffffff;
+        z-index: 999;
+        color: #ffffff;
+	}
+	.contain-body .sidebar .menu-box .menu-hide a{
+		font-size: 10px;
+		border-right: 1px solid #00b38a;
+		    text-decoration: none;
+	}
+	.contain-body .sidebar .menu-box .menu-hide h4{
+		margin:0;
+		padding: 0;
+		font-weight: normal;
+		font-size: 14px;
+	}
+	.contain-body .sidebar .menu-job{
+		padding: 10px 0 14px;
+		position: relative;
+	}
+	.contain-body .sidebar .menu-job h2{
+		display: inline-block;
+	    margin: 0;
+	    font-size: 18px;
+	    font-weight: 500;
+	}
+	.contain-body .sidebar .menu-job a{
+		margin: 0 5px 5px 0;
+    	padding: 0 8px;
+    	color: #555;
+    	font-size: 14px;
+	}
+	.contain-body .sidebar .menu-job a:hover{
+		text-decoration: underline;
+		color:#556;
+		cursor: pointer;
+		color: #00b38a;
+	}
+	.contain-body .sidebar .menu-job .arrow{
+		background: url("./arrow.png") no-repeat;
+		position: absolute;
+		width: 6px;
+    	height: 11px;
+    	top:21.5px;
+    	right: -6px;
+    	margin-right: 8px;
+	}
+	
+	.contain-body .job-tab{
+		margin-top: 52px;
+		display: inline-block;
+	    margin-bottom: 14px;
+	    font-size: 14px;
+	    width: 1200px;
+	    border-bottom: 1px solid #E8E8E8;
+		}
+	.contain-body .job-tab li{
+		display: inline-block;
+		padding: 14px 0;
+	    margin-right: 58px;
+	    font-size: 16px;
+	    color: #999;
+	    cursor: pointer;
+	}
+	.contain-body .job-tab .selected{
+		border-bottom: 2px solid #333;
+	    background: #fff;
+	    color: #333;
+	}
+	.contain-body .job-list .tips-icon{
+		width: 18px;
+	    height: 18px;
+	    background-color: #e6e6e6;
+	    border-radius: 50%;
+	    text-align: center;
+	    line-height: 18px;
+	    margin-right: 10px;
+	    color: #fff;
+	    float: left;
+	}
+	.contain-body .job-list a{
+		margin-right: 40px;
+	    color: #999;
+	    float: left;
+	    display: inline-block;
+	}
+	.contain-body .job-list .tips{
+		font-size: 14px;
+		height: 18px;
+	    line-height: 18px;
+	    margin-top: 14px;
+	    margin-bottom: 2px;
+		}
+	.contain-body .job-list .tips-text {
+		color: #00b38a;
+	    padding-right: 12px;
+	    padding-left: 12px;
+	    font-size: 14px;
+	    float: left;
+/*	    border-right: 1px solid #999;*/
+	    cursor: pointer;
+	}
+	.contain-body .job-list .list-ul{
+		width: 1216px;
+		height: 648px;
+	}
+	.contain-body .job-list .list-item{
+		width: 350px;
+		float: left;
+	    height: 180px;
+	    margin: 16px 16px 0 0;
+	    padding: 20px 18px 0;
+	    border: 1px solid #EAEEED;
+	    background-color: #fff;
+	}
+	.contain-body .job-list .list-item .item-top{
+		height: 60px;
+	}
+	.contain-body .job-list .list-item .item-top1{
+		height: 21px;
+	}
+	.contain-body .job-list .list-item h2{
+		font-size: 16px;
+	    display: inline-block;
+	    padding: 0;
+	    margin: 0;
+	    color: #333;
+	    font-weight: 500;
+	    cursor: pointer;
+	}
+	.contain-body .job-list .list-item .item-name {
+		float: left;
+
+	}
+	.contain-body .job-list .list-item .item-name span{ 
+	   	color: #999;
+	    font-size: 14px;
+	    margin-right: 5px;
+	}
+	.contain-body .job-list .list-item  .chat-me{
+		display: inline-block;
+	    width: 16px;
+	    height: 16px;
+	    background: url(./icon_chat2.png) no-repeat;
+	    cursor: pointer;
+	    vertical-align: middle;
+	}
+	.contain-body .job-list .list-item  .salary{ 
+	   	color: red;
+	   	display: inline-block;
+	    font-size: 16px;
+	    float: right;
+	}
+	.contain-body .job-list .list-item .item-info{
+		height: 30px;
+	    line-height: 30px;
+	    color: #777;
+	    float: left;
+	    font-size: 15px;
+	}
+	.contain-body .job-list .list-item .labels{
+	    margin-right: 20px;
+	    height: 30px;
+	    line-height: 30px;
+	}
+	.contain-body .job-list .list-item .labels .wordcut{
+		display: inline-block;
+	    width: 61px;
+	    height: 26px;
+	    padding: 0 5px;
+	    font-size: 12px;
+	    line-height: 26px;
+	    color: #999;
+	    border: 1px solid #F0F0F0;
+	    border-radius: 3px;
+	    text-align: center;
+	    cursor: pointer;
+	}
+	.contain-body .job-list .list-item .item-btm{
+	    margin-top: 18px;
+	    padding-top: 18px;
+	    border-top: 1px dashed #E0E0E0;
+    }
+    .contain-body .job-list .list-item .item-btm img{
+    	width: 40px;
+    	height: 40px;
+    	display: inline-block;
+    	float: left;
+    }
+    .contain-body .job-list .list-item .item-btm .bottom-right{
+    	height: 40px;
+    }
+    .contain-body .job-list .list-item .item-btm .company_name{
+    	color: #555;
+    	font-size: 15px;
+    	float: left;
+    	width:  297px;
+    }
+    .contain-body .job-list .list-item .item-btm .industry{
+    	height: 20px;
+        line-height: 20px;
+        color: #999;
+        float: left;
+        font-size: 14px;
+    }
+    .hide{
+    	display: none;
+    }
+    .contain-body .banner_bg{
+		float: left;
+	    margin-top: 20px;
+	    height: 365px;
+	    width: 840px;
+	    background-color: #F2F5F4;
+	    margin-left: 20px;
+	    position: relative;
+	    overflow: hidden;
+	}
+    .contain-body .banner_bg ul{
+        width: 1800px;
+        height:346px;
+        position: absolute;
+        left:-864px;
+            }
+    .contain-body .banner_bg li{
+    	width: 864px;
+    	height:346px;
+    	float: left;
+    	display: inline-block;
+    }
+     .contain-body .banner_bg  img{
+     	width: 864px;
+    	height:374px;
+     }
+     .control_left{
+     	width: 18px;
+	    height: 34px;
+	    position: absolute;
+	    left:0;
+	    top: 0;
+	    bottom: 0;
+		margin: auto 0;
+	    cursor: pointer;
+	    background-size: 18px 34px;
+	    background: url("./banner_arrow_left.png");
+	    z-index:3; 
+     }
+     .control_right{
+     	width: 18px;
+	    height: 34px;
+	    position: absolute;
+	    right:0;
+	    top: 0;
+	    bottom: 0;
+		margin: auto 0;
+	    cursor: pointer;
+	    background-size: 18px 34px;
+	    background: url("./banner_arrow_right.png");
+     }
+     .thumbs i{
+     	display: block;
+     	width:6px;
+     	height:6px;
+     }
+</style>
+<body>
+	<div class="header">
+		<div class="bar">
+			<div class="left-bar"><a href="" class="app">拉勾APP</a>
+			<a href="" class="os">进入企业版</a>
+			</div>
+			<ul class="right-bar">
+				<li>消息</li>
+				<li>我的简历</li>
+				<li>投递箱</li>
+				<li>收藏夹</li>
+				<li>拉勾用户</li>
+			</ul>
+			</div>
+		<div class="nav">
+			<div class="nav-left">
+				<img src="logo.png"><a class="logo-1">全国站</a><a class="logo-2">[切换城市]</a>
+			</div>
+			<ul class="nav-mid">
+				<li class="selected">首页</li>
+				<li>公司</li>
+				<li>校园</li>
+				<li>言职</li>
+			</ul>
+		</div>
+	</div>
+	<div class="contain">
+		<div class="contain-header">
+			<div class="search">
+				<input type="" class="search-input" placeholder="搜索职位、公司或地点">
+				<button>搜索</button>
+			</div>
+			<div class="hot-search">
+				<b >热门搜索:</b>
+				<a href="">java</a>
+				<a href="">后端开发</a>
+				<a href="">移动产品经理</a>
+				<a href="">数据运营</a>
+				<a href="">产品经理</a>
+				<a href="">C++</a>
+				<a href="">PHP</a>
+			</div>
+		</div>
+		<div class="contain-body">
+			<div class="sidebar">
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>技术</h2> <a >java</a> <a>PHP</a> <a>C++</a> <a>区块链</a> 
+							<i class="arrow"></i>
+						</div>
+						<div class="menu-hide">
+							<h4>后端开发</h4>
+							<a href="">JAVA</a>
+							<a href="">C++</a>
+							<a href="">JAVA</a>
+							<a href="">JAVA</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>产品</h2> <a >产品总监</a> <a>产品经理</a> 
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>设计</h2> <a >UI设计师</a> <a>交互设计</a> <a>网页设计师</a> 
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>运营</h2> <a >新媒体运营</a> <a>编辑</a> <a>数据运营</a>  
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>市场</h2> <a >市场营销</a> <a>市场推广</a> <a>市场策划</a>
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>销售</h2> <a >销售专员</a> <a>销售经理</a> <a>销售总监</a>
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>职能</h2> <a >HR</a> <a>行政</a> <a>财务</a> <a>审计</a> 
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+				<div class="menu-box">
+					<div class="menu-job">
+						<div class="menu-list">
+							<h2>游戏</h2> <a >小游戏开发</a> <a>U3D</a> <a>游戏策划</a> 
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="banner_bg">			
+				<ul class="banner_ul">
+				<li class="banner_bg_1">
+					<img src="bg_1.png">
+				</li>
+				<li class="banner_bg_2">
+					<img src="bg_2.jpg">
+				</li>
+				
+			</ul>
+			<div class="banner_control">
+					<div class="control_left"></div>
+					<div class="control_right"></div>
+					
+		</div>
+		<ul class="thumbs">
+			<li><i></i></li>
+			<li><i></i></li>
+		</ul>
+	</div>
+			<ul class="job-tab">
+				<li class="selected">推荐职位</li>
+				<li>热门职位</li>
+				<li>最新职位</li>
+			</ul>
+			<div class="job-list">
+				<div class="tips">
+					<div class="tips-icon">?</div>
+					<a>推荐职位基于你的浏览、投递等行为及简历内容给出~</a>
+					<div class="tips-text">我知道了</div>
+					<div class="tips-text">去修改简历</div>
+				</div>
+				<ul class="list-ul">
+					<!-- <li class="list-item">
+						<div class="item-top">
+							<div class="item-top1">
+								<div class="item-name">
+									<h2 class="topic">人力资源学习生</h2><span class="create-time">[13.55发布]</span><div class="chat-me"></div>
+								</div>
+								<span class="salary">2K-4K</span>
+								
+							</div>
+							<div class="item-info">经典应届毕业生/本科</div>
+						</div>
+						<div class="labels">
+							<span class="wordcut">技能培训</span>
+							<span class="wordcut">节日礼物</span>
+							<span class="wordcut">年度旅游</span>
+						</div>
+						<div class="item-btm">
+							<img src="logo_1.png">
+							<div class="bottom-right">
+								<div class="company_name">古点(dotcom)</div>
+								<div class="industry">移动互联网，O2O/不需要融资/北京</div>
+							</div>
+						</div>
+					</li> -->
+
+				</ul>
+				<div class="list-ul hide">123</div>
+				<div class="list-ul hide">456</div>
+			</div>
+		</div>
+	</div>
+	<script  src="lagou.js"></script>
+</body>
+</html>
